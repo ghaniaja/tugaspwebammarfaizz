@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Details</title>
+    <link rel="stylesheet" href="guy.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h2 {
+            text-align: center;
+        }
+        form {
+            text-align: center;
+        }
+        input[type="number"] {
+            width: 50px;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <h2>Order Details</h2>
+    <form id="orderForm" action="confirm_order.php" method="post">
+        <div id="foodItems">
+            <h3>Food Items</h3>
+            <!-- Food items will be dynamically generated here -->
+        </div>
+
+        <div id="beverageItems">
+            <h3>Beverages</h3>
+            <!-- Beverages will be dynamically generated here -->
+        </div>
+
+        <label for="order_method">Order Method:</label>
+        <select name="order_method" id="order_method">
+            <option value="online">Pesan Online</option>
+            <option value="telephone">Pesan Melalui Telepon</option>
+            <option value="visit">Pesan Langsung Datang</option>
+        </select><br><br>
+        
+        <input type="submit" value="Proceed to Confirm Order">
+    </form>
+
+    <script>
+        // Food items with their prices
+        const foodItems = {
+            "Ayam Goreng": 25,
+            "Nasi Goreng": 20,
+            "Mie Goreng": 18,
+            "Sate Ayam": 30,
+            "Gado-gado": 15,
+            "Soto Ayam": 22
+        };
+
+        // Beverage items with their prices
+        const beverageItems = {
+            "Es Teh": 5,
+            "Es Jeruk": 6,
+            "Jus Apel": 8,
+            "Jus Alpukat": 10,
+            "Kopi": 7,
+            "Teh Hangat": 3
+        };
+
+        // Dynamically generate input fields for food items
+        const foodContainer = document.getElementById('foodItems');
+        Object.entries(foodItems).forEach(([item, price]) => {
+            const label = document.createElement('label');
+            label.textContent = `${item}:`;
+
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.name = item.toLowerCase().replace(/\s+/g, '_') + '_quantity';
+            input.min = 0;
+            input.value = 0;
+
+            foodContainer.appendChild(label);
+            foodContainer.appendChild(input);
+            foodContainer.appendChild(document.createElement('br'));
+        });
+
+        // Dynamically generate input fields for beverage items
+        const beverageContainer = document.getElementById('beverageItems');
+        Object.entries(beverageItems).forEach(([item, price]) => {
+            const label = document.createElement('label');
+            label.textContent = `${item}:`;
+
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.name = item.toLowerCase().replace(/\s+/g, '_') + '_quantity';
+            input.min = 0;
+            input.value = 0;
+
+            beverageContainer.appendChild(label);
+            beverageContainer.appendChild(input);
+            beverageContainer.appendChild(document.createElement('br'));
+        });
+    </script>
+</body>
+</html>
